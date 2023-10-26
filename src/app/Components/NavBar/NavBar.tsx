@@ -3,19 +3,19 @@ import Link from 'next/link';
 
 //import css when completed
 
-//need to fix this section 
+//do not use anchor tags
 
 export default function NavBar() {
     return (
         <nav className="navbar">
-            <Link href="/">
-                <a>Home</a>
+            <Link id='home' href="/">
+                Home
             </Link>
-            <Link href="/login">
-                <a>Login</a>
+            <Link id='login' href="/login">
+                Login
             </Link>
-            <Link href="/register">
-                <a>Register</a>
+            <Link id='register' href="/register">
+                Register
             </Link>
         </nav>
     )

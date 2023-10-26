@@ -1,14 +1,15 @@
 //create root layout for the app
-import React from "react"
 
-export default function RootLayout({
-    children,
-  }: {
-    children: React.ReactNode
-  }) {
+import NavBar from "./Components/NavBar/NavBar"
+
+export default function Layout ({ children }) {
     return (
-      <html lang="en">
-        <body>{children}</body>
-      </html>
+        <div>
+            <>
+                <NavBar />
+            </>
+            <main>{children}</main>
+        </div>
     )
-  }
+}
+

@@ -2,6 +2,7 @@
 
 import axios from 'axios';
 
+//Fetch call to get all sessions
 export const GetAllSessions = () => {
     return axios.get(`http://localhost:3000/sessions`)
         .then((res: { data: any; }) => res.data)

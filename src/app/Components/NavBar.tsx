@@ -1,32 +1,31 @@
-//Create a nav bar that will show logo being the home link, a link to the flow board, and a link to the photoshoots. The nav bar will be on every page of the app.
 
-//import Link for the links to work
 import Link from 'next/link';
-//import Image for the logo to appear
 import Image from 'next/image';
-
-//import css when completed
-
-//do not use anchor tags
 
 export default function NavBar() {
     return (
-        
-        <nav className='flex-between w-full pt-3 text-white'>
-            <Link id='home' href="/">
-                <Image src='/assets/Focus-Flow-Logo.png' 
-                alt='Focus Flow Logo' 
-                width={100} 
-                height={100} /> 
-            </Link>
-
-            <Link id='photo-sessions' href="/photo-sessions">
-                Photo Sessions
-            </Link>
-
-            <Link id='flow-board' href="/flow-board">
-                Flow Board
-            </Link>
+        <nav className="flex-no-wrap relative flex w-full items-center m-auto bg-[#1a1c1e]
+         lg:flex-wrap">
+            <div className="flex w-full flex-wrap items-center justify-between px-20">
+                    <Link href="/">
+                        <Image
+                            src="/assets/Focus-Flow-Logo.png"
+                            alt="Focus Flow Logo"
+                            width={130}
+                            height={130}
+                        />
+                    </Link>
+                   
+                    <Link href="/photo-sessions" className='text-white hover:text-gray-400 mr-4'>
+                            Photo Sessions
+                    </Link>
+                    
+                   
+                    <Link href="/flow-board" className=' text-white hover:text-gray-400'>
+                            Flow Board
+                    </Link>
+               
+                </div>
         </nav>
-    )
+    );
 }

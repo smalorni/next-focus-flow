@@ -1,5 +1,6 @@
 //This renders the flow board main page
 //import Flow Board component
+import FlowBoardList from "./FlowBoardList";
 
 export default function FlowBoard() {
     return (

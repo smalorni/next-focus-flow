@@ -9,10 +9,6 @@ export default function FlowBoard() {
                 <h1>My Flow Board</h1>
                 <FlowBoardList />
             </div>
-                
-            <div>
-                <h2>📌 PIN NEW IDEA</h2>
-            </div>
         </main>
     )
 }

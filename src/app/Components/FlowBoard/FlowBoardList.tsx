@@ -1,8 +1,10 @@
 //When a user click on the Flow Board navigation link, it will lead user to a new page where user can see all the flow board photos. User should be able to click on buttons to either add new board, edit current board or delete board. User should be able to search for a board by typing into the search.
 
 import { useState, useEffect } from 'react';
-import { GetAllBoards, DeleteBoard } from '../api/FlowBoard';
-import DeleteBoardModal from '../Components/DeleteBoardModal';
+import { GetAllBoards, DeleteBoard, EditBoard, AddBoard } from '../../api/FlowBoard';
+import DeleteBoardModal from './DeleteBoardModal';
+import EditBoardModal from './EditBoardModal';
+import AddNewBoard from './AddNewBoard';
 
 export default function FlowBoardList() {
     const [boards, setBoards] = useState([]);
@@ -12,6 +14,10 @@ export default function FlowBoardList() {
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
     {/* set state for delete board function */}
     const [deleteBoard, setDeleteBoard] = useState(null);
+    {/* set state for edit board function */}
+    const [editBoard, setEditBoard] = useState(null);
+    {/* set state for add board function */}
+    const [addBoard, setAddBoard] = useState(null);
 
     {/* fetch call to get all boards using axios */}
     useEffect(() => {
@@ -33,11 +39,58 @@ export default function FlowBoardList() {
         setFilteredBoard(filteredBoardArray);
     };
 
+    {/* edit board function */}
+    const handleEdit = (boardId: number) => {
+        const board = boards.find((board) => board.id === boardId);
+        setEditBoard(board);
+    };
+
     {/* delete board function */}
     const handleDelete = (boardId: number) => {
         setDeleteBoard({ id: boardId }); // set the board to be deleted
         setIsDeleteModalOpen(true); // open the delete board modal
     };
+
+    {/* add board function */}
+    const handleAddBoard = (newBoard: unknown) => {
+        setAddBoard(newBoard);
+    };
+
+    {/* add board useEffect */}
+    useEffect(() => {
+        if (addBoard) {
+            //Call API function
+            AddBoard(addBoard)
+                .then((newBoard) => {
+                    {/* update the state to add new board */}
+                    setBoards((updatedBoard) => [...updatedBoard, newBoard]);
+                    setAddBoard(null); //reset the add board state
+                })
+                .catch((error) => console.log('Error adding board:', error));
+        }
+    }, [addBoard]); //only run when addBoard state changes
+
+    {/* edit board useEffect */}
+    useEffect(() => {
+        if (editBoard) {
+            //Call API function
+            EditBoard(editBoard)
+                .then(() => {
+                    {/* update the state to remove deleted board */}
+                    setBoards((updatedBoard) => updatedBoard.map((board) => {
+                        if (board.id === editBoard.id) {
+                            return editBoard;
+                        } else {
+                            return board;
+                        }
+                    }));
+                    setEditBoard(null); //reset the edit board state
+                })
+                .catch((error) => console.log('Error editing board:', error));
+        }
+    }, [editBoard]); //only run when editBoard state changes
+
+    {/* delete board useEffect */}
 
     useEffect(() => {
         if (deleteBoard) {
@@ -76,7 +129,14 @@ export default function FlowBoardList() {
                         </div>
                         {/* Add edit and delete buttons */}
                         <div className='px-6 pt-4 pb-2'>
-                            <button>✏️ EDIT</button>
+                            <button onClick={() => handleEdit(board.id)}>✏️ EDIT</button>
+                            {/* Edit board modal */}
+                            <EditBoardModal
+                                openEditModal={editBoard !== null}
+                                closeEditModal={() => setEditBoard(null)}
+                                information={editBoard}
+                                onSave={(editedInfo) => setEditBoard({ ...editBoard, ...editedInfo })}
+                            />
                             <button onClick={() => handleDelete(board.id)}>❌ DELETE</button>
                         </div>
                         {/* Delete board modal */}

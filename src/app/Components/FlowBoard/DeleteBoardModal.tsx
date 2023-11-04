@@ -1,6 +1,6 @@
 //Create a modal component to delete board
 
-//This interface specifies the expected structure of the props that can be passed to the DeleteBoardModal component.
+//This interface specifies the expected structure of the props that can be passed to the DeleteBoard component.
 interface DeleteBoardModalProps {
   //Below are properties:
   //If openModal is true, the modal is open; if openModal is false, the modal is closed.

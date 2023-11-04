@@ -10,14 +10,14 @@ export default function NavBar() {
     const [openMenu, setOpenMenu] = useState(false);
     return (
         <nav className='bg-[#1a1c1e]'>
-            <div className='mx-auto max-w-7xl px-2 sm:px-6 lg:px-8'>
+            <div className='mx-auto max-w-7xl px-2 pb-2 sm:px-6 lg:px-8'>
                 <div className='relative flex h-16 items-center justify-between'>
-                    <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
+                <div className='absolute inset-y-0 left-0 flex items-center sm:hidden'>
                     {/* Hamburger menu button */}
                         <Hamburger direction='right' color='white' toggled={openMenu} toggle={setOpenMenu} />
                     </div>
                     
-                    <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start'>
+                    <div className='flex flex-1 items-center justify-center sm:items-stretch sm:justify-start pb-2'>
                         <div className='flex flex-shrink-0 items-center'>
                         <Link href="/">
                         <Image
@@ -31,8 +31,8 @@ export default function NavBar() {
                     </div>
                        {/* Icon when menu is closed. Menu open: "hidden", Menu closed: "block" */}
                        {/* Icon when menu is open. Menu open: "block", Menu closed: "hidden" */}
-                        <div className={`sm:flex space-x-4 ${openMenu ? 'block' : 'hidden'}`}>
-                            <Link href="/photo-sessions" className='text-white hover:underline underline-offset-8 decoration-blue-400 decoration-{3px} decoration-solid mr-6'>
+                        <div className={` ${openMenu ? 'block' : 'hidden'} sm:flex space-x-6`}>
+                            <Link href="/photo-sessions" className='text-white hover:underline underline-offset-8 decoration-blue-400 decoration-{3px} decoration-solid mr-4'>
                                 Photo Sessions
                             </Link>
                     
